@@ -48,37 +48,39 @@ class DeliveryVan:
         self.position += 3
 
 
-# TODO(DIP): add a RocketSled class here (name, symbol, position, move()).
+class RocketSled:
+    symbol = "🚀"
+
+    def __init__(self, name: str, speed: int = 5):
+        self.name = name
+        self.speed = speed
+        self.position = 0
+
+    def move(self) -> None:
+        self.position += self.speed
 
 
 class Race:
-    """VIOLATION (on purpose): this high-level policy is hardwired to two
-    concrete, low-level vehicle classes. Racing a different roster means
-    editing this class -- refactor it so it depends only on the Racer
-    abstraction, injected from the outside.
-    """
+    """High-level policy refactored: depends only on the injected racers."""
 
-    def __init__(self):
-        # TODO(DIP): accept `racers` (and optionally `track`) as
-        # constructor parameters instead of building vehicles here.
-        # Store the racers as `self.racers`.
-        self.vehicles = [SportsCar("Flash"), DeliveryVan("Steady Eddie")]
-        self.track = Track(length=30)
+    def __init__(self, racers, track=None):
+        self.racers = racers
+        self.track = track if track is not None else Track(length=30)
 
     def start(self):
-        return self.track.run(self.vehicles)
+        return self.track.run(self.racers)
 
 
 def main():
-    # TODO(DIP): once Race takes racers from the outside, build two
-    # different rosters (one of them using RocketSled) and race each of
-    # them, e.g.:
-    #
-    #   roster_a = [SportsCar("Flash"), DeliveryVan("Steady Eddie")]
-    #   Race(roster_a).start()
-    #   roster_b = [RocketSled("Comet"), DeliveryVan("Steady Eddie II")]
-    #   Race(roster_b).start()
-    Race().start()
+    # Carrera 1
+    roster_1 = [SportsCar("Flash"), DeliveryVan("Steady Eddie")]
+    race_1 = Race(racers=roster_1)
+    race_1.start()
+
+    # Carrera 2 (usando RocketSled)
+    roster_2 = [RocketSled("Apollo"), SportsCar("Red Bullet")]
+    race_2 = Race(racers=roster_2)
+    race_2.start()
 
 
 if __name__ == "__main__":
