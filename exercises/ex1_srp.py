@@ -40,8 +40,6 @@ class Car:
     def move(self) -> None:
         self.position += self.speed
 
-# TODO(SRP): write a RaceLogger class here (see the docstring above for
-# the exact methods it needs).
 class RaceLogger:
     """Only job: remember what happened in the race and save it to disk."""
     def __init__(self) -> None:

@@ -60,10 +60,6 @@ class UnreliableCar(Vehicle):
     symbol = "\U0001F699"
 
     def move(self) -> None:
-        # TODO(LSP): rewrite this so it never raises and never decreases
-        # `self.position`. "Unreliable" can still mean something (e.g.
-        # occasionally staying in place) -- it just can't break the
-        # Vehicle contract.
         if random.random() < 0.30:
             return
         self.position += 5

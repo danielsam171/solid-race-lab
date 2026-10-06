@@ -60,7 +60,6 @@ class Motorcycle(Vehicle):
     symbol = "\U0001F3CD"
 
     def move(self) -> None:
-        # TODO(OCP): move forward by a varying, sometimes-large amount.
         self.position += random.randint(1, 9)
 
 
@@ -69,12 +68,9 @@ class Bicycle(Vehicle):
 
     def __init__(self, name: str):
         super().__init__(name)
-        # TODO(OCP): add any state you need to track fatigue over time.
         self.ticks = 0
 
     def move(self) -> None:
-        # TODO(OCP): move forward by a shrinking amount as ticks go by
-        # (never less than 1).
         step = max(1, 5 - self.ticks // 4)
         self.position += step
         self.ticks += 1
