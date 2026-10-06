@@ -64,13 +64,9 @@ class UnreliableCar(Vehicle):
         # `self.position`. "Unreliable" can still mean something (e.g.
         # occasionally staying in place) -- it just can't break the
         # Vehicle contract.
-        roll = random.random()
-        if roll < 0.15:
-            raise RuntimeError(f"{self.name} broke down!")
-        elif roll < 0.30:
-            self.position -= 3  # ran out of gas and rolled back downhill
-        else:
-            self.position += 5
+        if random.random() < 0.30:
+            return
+        self.position += 5
 
 
 def main():
